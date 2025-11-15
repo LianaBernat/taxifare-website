@@ -29,6 +29,17 @@ passenger_count = st.number_input('passengers', min_value=1, max_value=8,
 
 fare_button = st.button('Get Taxifare')
 
+
+url = 'https://taxifare.lewagon.ai/predict'
+
+status_code_dict = {
+    200:'sucesso',
+    400:'erro do cliente',
+    401:'falta de autenticação',
+    403:'falta de autenticação',
+    500:'erro no servidor'}
+
+
 if fare_button:
     pickup_datetime = datetime.combine(pickup_date, pickup_time)
     pickup_datetime = pickup_datetime.strftime("%Y-%m-%d %H:%M:%S")
@@ -41,24 +52,14 @@ if fare_button:
         'dropoff_latitude': dropoff_latitude,
         'passenger_count': passenger_count}
 
+    response = requests.get(url, params=params)
 
 
-url = 'https://taxifare.lewagon.ai/predict'
+    if response.status_code == 200:
+        print(f'The estimated taxifare is {response.json()}')
 
-response = requests.get(url, params=params)
+    elif response.status_code in status_code_dict.key:
+        print(status_code_dict[response.status_code])
 
-status_code_dict = {
-    200:'sucesso',
-    400:'erro do cliente',
-    401:'falta de autenticação',
-    403:'falta de autenticação',
-    500:'erro no servidor'}
-
-if response.status_code == 200:
-    print(f'The estimated taxifare is {response.json()}')
-
-elif response.status_code in status_code_dict.key:
-    print(status_code_dict[response.status_code])
-
-else:
-    print('erro desconhecido')
+    else:
+        print('erro desconhecido')
