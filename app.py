@@ -51,12 +51,11 @@ if fare_button:
         'dropoff_longitude': dropoff_longitude,
         'dropoff_latitude': dropoff_latitude,
         'passenger_count': passenger_count}
-    st.write("📤 Enviando parâmetros:", params)
+
+    st.write("📤 Enviando parâmetros.")
 
     try:
         response = requests.get(url, params=params)
-        st.write("📨 Status:", response.status_code)  # DEBUG
-        st.write("📨 Resposta raw:", response.text)   # DEBUG
     except Exception as e:
         st.error(f"❌ Erro na requisição: {e}")
         st.stop()
