@@ -1,6 +1,5 @@
 import streamlit as st
 import requests
-import pandas as pd
 from datetime import datetime
 
 '''
@@ -34,13 +33,13 @@ if fare_button:
     pickup_datetime = datetime.combine(pickup_date, pickup_time)
     pickup_datetime = pickup_datetime.strftime("%Y-%m-%d %H:%M:%S")
 
-    params = pd.DataFrame.from_dict({
-        'pickup_datetime': [pickup_datetime],
-        'pickup_longitude':[pickup_longitude],
-        'pickup_latitude': [pickup_latitude],
-        'dropoff_longitude': [dropoff_longitude],
-        'dropoff_latitude': [dropoff_latitude],
-        'passenger_count': [passenger_count]})
+    params = {
+        'pickup_datetime': pickup_datetime,
+        'pickup_longitude':pickup_longitude,
+        'pickup_latitude': pickup_latitude,
+        'dropoff_longitude': dropoff_longitude,
+        'dropoff_latitude': dropoff_latitude,
+        'passenger_count': passenger_count}
 
 
 
