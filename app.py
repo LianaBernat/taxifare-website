@@ -38,10 +38,9 @@ status_code_dict = {
     403:'falta de autenticação',
     500:'erro no servidor'}
 
+pickup_datetime = f"{pickup_date} {pickup_time}"
 
 if fare_button:
-    pickup_datetime = f"{pickup_date} {pickup_time}"
-
 
     params = {
         'pickup_datetime': pickup_datetime,
