@@ -26,7 +26,7 @@ dropoff_latitude = st.number_input('dropoff_latitude', min_value=None, max_value
                                    value="min", format="%0.6f")
 
 passenger_count = st.number_input('passengers', min_value=1, max_value=8,
-                                   value="min", format="%0.0f")
+                                   value="min", format="%d")
 
 fare_button = st.button('Get Taxifare')
 
@@ -41,8 +41,6 @@ if fare_button:
         'dropoff_longitude': [dropoff_longitude],
         'dropoff_latitude': [dropoff_latitude],
         'passenger_count': [passenger_count]})
-
-    params['pickup_datetime'] = pd.to_datetime(params['pickup_datetime'], utc=True)
 
 
 
