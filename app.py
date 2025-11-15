@@ -1,6 +1,5 @@
 import streamlit as st
 import requests
-from datetime import datetime
 
 '''
 # TaxiFareModel front
@@ -41,8 +40,8 @@ status_code_dict = {
 
 
 if fare_button:
-    pickup_datetime = datetime.combine(pickup_date, pickup_time)
-    pickup_datetime = pickup_datetime.strftime("%Y-%m-%d %H:%M:%S")
+    pickup_datetime = f"{pickup_date} {pickup_time}"
+
 
     params = {
         'pickup_datetime': pickup_datetime,
