@@ -1,6 +1,7 @@
 import streamlit as st
 import requests
 import pandas as pd
+from datetime import datetime
 
 '''
 # TaxiFareModel front
@@ -13,24 +14,25 @@ pickup_date = st.date_input('date', value = None,  format="YYYY/MM/DD")
 pickup_time = st.time_input('time', value = None)
 
 pickup_longitude = st.number_input('pickup_longitude', min_value=None, max_value=None,
-                                   value='min', format="%0.2f")
+                                   value='min', format="%0.6f")
 
 pickup_latitude = st.number_input('pickup_latitude', min_value=None, max_value=None,
-                                   value="min", format=None)
+                                   value="min", format="%0.6f")
 
 dropoff_longitude = st.number_input('dropoff_longitude', min_value=None, max_value=None,
-                                   value="min", format=None)
+                                   value="min", format="%0.6f")
 
 dropoff_latitude = st.number_input('dropoff_latitude', min_value=None, max_value=None,
-                                   value="min", format=None)
+                                   value="min", format="%0.6f")
 
-passenger_count = st.number_input('passengers', min_value=None, max_value=None,
+passenger_count = st.number_input('passengers', min_value=1, max_value=8,
                                    value="min", format="%0.0f")
 
 fare_button = st.button('Get Taxifare')
 
 if fare_button:
-    pickup_datetime = f"{pickup_date } {pickup_time}"
+    pickup_datetime = datetime.combine(pickup_date, pickup_time)
+    pickup_datetime = pickup_datetime.strftime("%Y-%m-%d %H:%M:%S")
 
     params = pd.DataFrame.from_dict({
         'pickup_datetime': [pickup_datetime],
