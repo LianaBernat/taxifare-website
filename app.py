@@ -51,15 +51,19 @@ if fare_button:
         'dropoff_longitude': dropoff_longitude,
         'dropoff_latitude': dropoff_latitude,
         'passenger_count': passenger_count}
+    st.write("📤 Enviando parâmetros:", params)
 
-    response = requests.get(url, params=params)
+    try:
+        response = requests.get(url, params=params)
+        st.write("📨 Status:", response.status_code)  # DEBUG
+        st.write("📨 Resposta raw:", response.text)   # DEBUG
+    except Exception as e:
+        st.error(f"❌ Erro na requisição: {e}")
+        st.stop()
 
 
     if response.status_code == 200:
-        print(f'The estimated taxifare is {response.json()}')
-
-    elif response.status_code in status_code_dict.key:
-        print(status_code_dict[response.status_code])
+        st.success(f"💰 Estimated fare: {response.json()}")
 
     else:
-        print('erro desconhecido')
+       st.error(f"❌ Erro {response.status_code} — {status_code_dict.get(response.status_code, 'desconhecido')}")
