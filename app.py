@@ -62,7 +62,7 @@ if fare_button:
 
 
     if response.status_code == 200:
-        st.success(f"💰 Estimated fare: {response.json()}")
+        st.success(f"💰 Estimated fare: {response.json()['fare']}")
 
     else:
        st.error(f"❌ Erro {response.status_code} — {status_code_dict.get(response.status_code, 'desconhecido')}")
